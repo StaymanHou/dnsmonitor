@@ -26,7 +26,9 @@ class Command(BaseCommand):
                     last_change_point = ChangePoint.objects.filter(domain=domain, record_type=record_type).last()
                     new_change_point = ChangePoint()
                     try :
-                        answers = dns.resolver.query(domain.name, record_type.name)
+                        resolver = dns.resolver
+                        resolver.timeout = self.setting.timeout
+                        answers = resolver.query(domain.name, record_type.name)
                     except Exception, e:
                         new_change_point.value = str(e.__class__)
                         new_change_point.trackback = str(traceback.format_exc())
