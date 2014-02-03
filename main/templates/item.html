@@ -11,11 +11,13 @@
       <tr>
         <td>time</td>
         <td>status</td>
+        <td>detail</td>
       </tr>
       {% for change_point in change_points %}
       <tr>
         <td>{{change_point.time}}</td>
         <td>{{change_point.value}}</td>
+        <td>{{change_point.traceback}}</td>
       </tr>
       {% endfor %}
     </table>

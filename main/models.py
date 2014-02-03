@@ -25,5 +25,6 @@ class ChangePoint(models.Model):
     record_type = models.ForeignKey(RecordType)
     time = models.DateTimeField(auto_now_add=True)
     value = models.CharField(max_length=200)
+    trackback = models.CharField(max_length=1000)
     def __unicode__(self):
         return str(self.time)+': '+str(self.value)

@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from main.models import Setting, RecordType, Domain, ChangePoint
 from time import sleep
 import dns.resolver
+import traceback
 
 class Command(BaseCommand):
     args = '<N/A>'
@@ -28,6 +29,7 @@ class Command(BaseCommand):
                         answers = dns.resolver.query(domain.name, record_type.name)
                     except Exception, e:
                         new_change_point.value = str(e.__class__)
+                        new_change_point.trackback = str(traceback.format_exc())
                     else:
                         sorted_result_list = [ str(answer) for answer in answers ]
                         sorted_result_list.sort()
