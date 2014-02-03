@@ -29,7 +29,9 @@ class Command(BaseCommand):
                     except Exception, e:
                         new_change_point.value = str(e.__class__)
                     else:
-                        new_change_point.value = '|'.join([ str(answer) for answer in answers ].sort())
+                        sorted_result_list = [ str(answer) for answer in answers ]
+                        sorted_result_list.sort()
+                        new_change_point.value = '|'.join([ str(answer) for answer in answers ])
                     if last_change_point is None or new_change_point.value != last_change_point.value:
                         new_change_point.domain = domain
                         new_change_point.record_type = record_type
