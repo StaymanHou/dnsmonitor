@@ -17,7 +17,7 @@ def table(request):
     for domain in domains:
         for record_type in record_types:
             change_point_countss[domain.name][record_type.name] = ChangePoint.objects.filter(domain=domain, record_type=record_type, time__range=[a_day_ago, now]).count()
-            if change_point_countss[domain.name][record_type.name] >= 0:
+            if change_point_countss[domain.name][record_type.name] > 0:
                 change_point_lastss[domain.name][record_type.name] = ChangePoint.objects.filter(domain=domain, record_type=record_type).last().value
     context = {
         'domains': [ domain for domain in domains ],
