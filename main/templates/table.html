@@ -5,8 +5,10 @@
 <head>
   <title>Table</title>
   <style>
-    a {color:blue;}      /* unvisited link */
-    a:visited {color:blue;}  /* visited link */
+    a {color:green;}      /* unvisited link */
+    a:visited {color:green;}  /* visited link */
+    a.note {color:#CC9900;}
+    a.note:visited {color:#CC9900;}
     a.warn {color:red;}
     a.warn:visited {color:red;}
   </style>
@@ -25,7 +27,7 @@
       <tr>
         <td>{{domain.name}}</td>
         {% for record_type in record_types %}
-        <td><a href="/main/item.html/{{domain.id}}/{{record_type.id}}/"{% if change_point_countss|getktv:domain.name|getktv:record_type.name > 0 %} class="warn"{% endif %}>({{ change_point_countss|getktv:domain.name|getktv:record_type.name }}) {{ change_point_lastss|getktv:domain.name|getktv:record_type.name }}</a></td>
+        <td><a href="/main/item.html/{{domain.id}}/{{record_type.id}}/"{% if change_point_countss|getktv:domain.name|getktv:record_type.name = 1 %} class="note"{% elif change_point_countss|getktv:domain.name|getktv:record_type.name > 1 %} class="warn"{% endif %}>({{ change_point_countss|getktv:domain.name|getktv:record_type.name }}) {{ change_point_lastss|getktv:domain.name|getktv:record_type.name }}</a></td>
         {% endfor %}
       </tr>
       {% endfor %}
