@@ -1,0 +1,35 @@
+{% load dict_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Table</title>
+  <style>
+    a {color:blue;}      /* unvisited link */
+    a:visited {color:blue;}  /* visited link */
+    a.warn {color:red;}
+    a.warn:visited {color:red;}
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <table border="1">
+      <tr>
+        <td>domain\record</td>
+        {% for record_type in record_types %}
+        <td>{{record_type.name}}</td>
+        {% endfor %}
+      </tr>
+      {% for domain in domains %}
+      <tr>
+        <td>{{domain.name}}</td>
+        {% for record_type in record_types %}
+        <td><a href="/main/item.html/{{domain.id}}/{{record_type.id}}/"{% if change_point_countss|getktv:domain.name|getktv:record_type.name > 0 %} class="warn"{% endif %}>({{ change_point_countss|getktv:domain.name|getktv:record_type.name }}) {{ change_point_lastss|getktv:domain.name|getktv:record_type.name }}</a></td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>
